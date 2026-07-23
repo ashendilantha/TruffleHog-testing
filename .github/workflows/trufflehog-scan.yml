@@ -23,9 +23,7 @@ jobs:
               uses: trufflesecurity/trufflehog@main
               with:
                   path: ./
-                  base: ${{ github.event.pull_request.base.sha || github.event.before }}
-                  head: ${{ github.event.pull_request.head.sha || github.sha }}
-                  extra_args: --results=verified,unknown
+                  extra_args: --no-verification --fail
 
             - name: Block push - secrets detected
               if: failure()
@@ -53,17 +51,17 @@ jobs:
                               body: [
                                   "## Security Alert: Secrets Detected!",
                                   "",
-                                  "TruffleHog has detected **potential secrets or API keys** in this pull request.",
+                                  "TruffleHog has detected potential secrets or API keys in this pull request.",
                                   "",
-                                  "**This PR is BLOCKED from merging until secrets are removed.**",
+                                  "This PR is BLOCKED from merging until secrets are removed.",
                                   "",
                                   "### Steps to Fix:",
-                                  "1. **Remove** the secret from your code immediately",
-                                  "2. **Rotate/Revoke** the exposed secret — assume it is compromised",
-                                  "3. **Use environment variables** or a secrets manager (e.g. GitHub Secrets) instead",
+                                  "1. Remove the secret from your code immediately",
+                                  "2. Rotate/Revoke the exposed secret - assume it is compromised",
+                                  "3. Use environment variables or a secrets manager (e.g. GitHub Secrets) instead",
                                   "",
-                                  ">  Even if you remove it from the latest commit, it may still be in git history.",
-                                  "> Consider using `git filter-repo` or BFG Repo Cleaner to purge it from history."
+                                  "Even if you remove it from the latest commit, it may still be in git history.",
+                                  "Consider using git filter-repo or BFG Repo Cleaner to purge it from history."
                               ].join("\n")
                           });
                       }
