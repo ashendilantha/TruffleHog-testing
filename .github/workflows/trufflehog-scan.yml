@@ -20,5 +20,5 @@ jobs:
               with: 
                 path: ./
                 base: ${{ github.event.repository.default_branch }}
-                head: HEAD
+                head: HEAD${{ github.ref_name }}
                 extra_args: --only-verified --fail

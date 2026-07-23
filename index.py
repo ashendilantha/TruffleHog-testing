@@ -1,3 +1,3 @@
 print("Hello, World!")
 
-api_key = "testingAPI83_1_2_4"
+api_key = "ghp_1234567890abcdefghijklmnopqrstuvwxyz"
