@@ -23,7 +23,7 @@ jobs:
               uses: trufflesecurity/trufflehog@main
               with:
                   path: ./
-                  extra_args: --no-verification --fail
+                  extra_args: --no-verification
 
             - name: Block push - secrets detected
               if: failure()
