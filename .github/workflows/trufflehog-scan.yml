@@ -2,9 +2,7 @@ name: TruffleHog Secret Scan
 
 on:
     push:
-        branches: [main, dev]
     pull_request:
-        branches: [main, dev]
 
 jobs:
     trufflehog:
