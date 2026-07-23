@@ -1,0 +1,1 @@
+STRIPE_SECRET=sk_test_51ExampleFakeSecretKey1234567890
