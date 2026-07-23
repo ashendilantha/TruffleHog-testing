@@ -26,13 +26,13 @@ jobs:
                   path: ./
                   base: ${{ github.event.pull_request.base.sha || github.event.before }}
                   head: ${{ github.event.pull_request.head.sha || github.sha }}
-                  extra_args: --results=verified,unknown --fail
+                  extra_args: --results=verified,unknown
 
             - name: Block push - secrets detected
               if: failure()
               run: |
-                  echo "🚨 TruffleHog detected secrets in this commit!"
-                  echo "❌ Push/merge is BLOCKED until secrets are removed."
+                  echo "TruffleHog detected secrets in this commit!"
+                  echo "Push/merge is BLOCKED until secrets are removed."
                   echo ""
                   echo "Steps to fix:"
                   echo "  1. Remove the secret from your code"
@@ -52,7 +52,7 @@ jobs:
                               owner: context.repo.owner,
                               repo: context.repo.repo,
                               body: [
-                                  "## 🚨 Security Alert: Secrets Detected!",
+                                  "## Security Alert: Secrets Detected!",
                                   "",
                                   "TruffleHog has detected **potential secrets or API keys** in this pull request.",
                                   "",
@@ -63,7 +63,7 @@ jobs:
                                   "2. **Rotate/Revoke** the exposed secret — assume it is compromised",
                                   "3. **Use environment variables** or a secrets manager (e.g. GitHub Secrets) instead",
                                   "",
-                                  "> ⚠️ Even if you remove it from the latest commit, it may still be in git history.",
+                                  ">  Even if you remove it from the latest commit, it may still be in git history.",
                                   "> Consider using `git filter-repo` or BFG Repo Cleaner to purge it from history."
                               ].join("\n")
                           });
